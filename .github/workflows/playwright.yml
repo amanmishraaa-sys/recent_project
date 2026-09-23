@@ -5,33 +5,6 @@ on:
   pull_request:
     branches: [ main ]
 
-  workflow_dispatch:
-    inputs:
-
-      test_path:
-        description: "Test file or directory"
-        required: false
-        default: "all"
-        type: choice
-        options:
-          - src/tests/loginPractice
-          - src/tests/automation
-          - src/tests/clientLogin
-          - src/tests/uploadAndDownload
-          - all
-
-      workers:
-        description: "Number of parallel workers"
-        required: false
-        default: "2"
-        type: number
-
-      retries:
-        description: "Number of retries"
-        required: false
-        default: "1"
-        type: number
-
 jobs:
   test:
     timeout-minutes: 60
@@ -52,10 +25,7 @@ jobs:
     - name: Run Playwright tests
       shell: pwsh
       run: |
-        $testCommand = "npx playwright test "./src/tests" --workers="6" --retries="1""
-
-        Write-Host "Executing: $testCommand"
-        Invoke-Expression $testCommand
+        npx playwright test ./src/tests --workers=6 --retries=1
 
     - uses: actions/upload-artifact@v5
       if: always()
