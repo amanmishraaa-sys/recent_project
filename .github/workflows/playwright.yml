@@ -1,0 +1,65 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+    inputs:
+
+      test_path:
+        description: "Test file or directory"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - src/tests/loginPractice
+          - src/tests/automation
+          - src/tests/clientLogin
+          - src/tests/uploadAndDownload
+          - all
+
+      workers:
+        description: "Number of parallel workers"
+        required: false
+        default: "2"
+        type: number
+
+      retries:
+        description: "Number of retries"
+        required: false
+        default: "1"
+        type: number
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Playwright tests
+      shell: pwsh
+      run: |
+        $testCommand = "npx playwright test"
+
+        # Workers and retries
+        $testCommand += " --workers=`"${{ inputs.workers }}`""
+        $testCommand += " --retries=`"${{ inputs.retries }}`""
+
+        Write-Host "Executing: $testCommand"
+        Invoke-Expression $testCommand
+
+    - uses: actions/upload-artifact@v5
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 7

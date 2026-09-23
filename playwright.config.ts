@@ -1,0 +1,31 @@
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./src/tests",
+  timeout: 180 * 1000,
+  expect: {
+    timeout: 6 * 1000,
+  },
+
+  reporter: "html",
+
+  fullyParallel: true,
+
+  retries: 0,
+
+  workers: 6 ,
+
+  projects: [
+    {
+      name: "chromium",
+      use: {
+        browserName: "chromium",
+        headless: false,
+        trace: "on",
+        screenshot: "on",
+        viewport: { width: 1920, height: 1080 },
+        video: "on",
+      },
+    },
+  ],
+});
