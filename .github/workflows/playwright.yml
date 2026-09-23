@@ -17,14 +17,14 @@ jobs:
       with:
         node-version: lts/*
 
-    - name: Install dependencies
+    - name: Install Node.js dependencies
       run: npm ci
 
-    - name: Install the required Playwright Browser
+    - name: Install Playwright browsers
       shell: bash
       run: npx playwright install --with-deps
 
-    - name: Run Playwright tests
+    - name: Run Playwright tests on chromium
       shell: pwsh
       run: |
         npx playwright test ./src/tests --project="chromium" --workers=6 --retries=1
