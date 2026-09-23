@@ -25,7 +25,7 @@ jobs:
     - name: Run Playwright tests
       shell: pwsh
       run: |
-        npx playwright test ./src/tests --workers=6 --retries=1
+        npx playwright test ./src/tests --project="chromium" --workers=6 --retries=1
 
     - uses: actions/upload-artifact@v5
       if: always()

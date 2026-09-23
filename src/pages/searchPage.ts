@@ -97,4 +97,8 @@ export class SearchPage{
   async verifyErrorMessage(){
     await expect(this.errorMessage).toBeVisible();
   }
+
+  async waitForPageLoad(){
+    await this.page.waitForLoadState('networkidle');
+  }
 }
