@@ -52,11 +52,7 @@ jobs:
     - name: Run Playwright tests
       shell: pwsh
       run: |
-        $testCommand = "npx playwright test"
-
-        # Workers and retries
-        $testCommand += " --workers=`"${{ inputs.workers }}`""
-        $testCommand += " --retries=`"${{ inputs.retries }}`""
+        $testCommand = "npx playwright test "./src/tests" --workers="6" --retries="1""
 
         Write-Host "Executing: $testCommand"
         Invoke-Expression $testCommand
