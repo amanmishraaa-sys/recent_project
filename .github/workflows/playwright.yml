@@ -20,9 +20,9 @@ jobs:
     - name: Install Node.js dependencies
       run: npm ci
 
-    - name: Install Playwright browsers
+    - name: Install Chromium browsers
       shell: bash
-      run: npx playwright install --with-deps
+      run: npx playwright install chromium
 
     - name: Run Playwright tests on chromium
       shell: pwsh
