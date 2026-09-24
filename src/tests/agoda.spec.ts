@@ -3,7 +3,7 @@ import { test } from "../fixtures/fixtures";
 /*
   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<IMPORTANT NOTE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   Verification steps in the below mentioned TCs has not been added because I am not getting any result for the selected route with today/tomorrow's date.
-  Please check the precvious reports in Github actions section on git.
+  Please check the precvious reports here: https://github.com/amanmishraaa-sys/recent_project/actions.
 */
 test.describe(`Search available flights for today and tomorrow`, () => {
   test(`Search available flights for today`, async ({ agodaPage }) => {
